@@ -1,8 +1,6 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
-from models import db
-from models import Profile
+from flask import Flask, request, jsonify
+
+from models import db, Profile
 from config import config
 
 def create_app(enviroment):
@@ -21,13 +19,23 @@ app = create_app(enviroment)
 
 @app.route('/api/v1/profiles/', methods=['GET'])
 def get_profiles():
-    response = {'message': 'success'}
-    return jsonify(response)
+    profiles = [ profile.json() for profile in Profile.query.all() ] 
+    response = jsonify({'profiles': profiles })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
-@app.route('/api/v1/profiles/<id>', methods=['GET'])
+# @app.route('/api/v1/profiles/<id>', methods=['GET'])
+# def get_profile(id):
+#     response = {'message': 'success'}
+#     return jsonify(response)
+
+@app.route('/api/v1/profiles/id/', methods=['GET'])
 def get_profile(id):
-    response = {'message': 'success'}
-    return jsonify(response)
+    profile = Profile.query.filter_by(id=id).first()
+    if profile is None:
+        return jsonify({'message': 'User does not exists'}), 404
+
+    return jsonify({'profile': profile.json() })
 
 @app.route('/api/v1/profiles/', methods=['POST'])
 def create_profile():
@@ -38,7 +46,7 @@ def create_profile():
     if json.get('user_id') is None:
         return jsonify({'message': 'Bad request'}), 400
 
-    profile = Profile.create(json['user_id'], json['description'])
+    profile = Profile.create(json['user_id'], json['brief_description'], json['fullname'], json['full_description'])
 
     return jsonify({'profile': profile.json() })
 

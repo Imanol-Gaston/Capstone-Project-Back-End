@@ -9,12 +9,14 @@ class Profile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False) 
-    description = db.Column(db.String(500), nullable=False) 
+    brief_description = db.Column(db.String(500), nullable=False) 
     created_at = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
+    fullname = db.Column(db.String(50), nullable=False)
+    full_description = db.Column(db.String(3000), nullable=True)
     
     @classmethod
-    def create(cls, user_id, description):
-      profile = Profile(user_id=user_id, description=description)
+    def create(cls, user_id, brief_description, fullname, full_description):
+      profile = Profile(user_id=user_id, brief_description=brief_description, fullname=fullname, full_description=full_description)
       return profile.save()
 
     def save(self):
@@ -30,8 +32,10 @@ class Profile(db.Model):
       return {
         'id': self.id,
         'user_id': self.user_id,
-        'description': self.description,
-        'created_at': self.created_at
+        'brief_description': self.brief_description,
+        'created_at': self.created_at,
+        'fullname': self.fullname,
+        'full_description': self.full_description
       }
 
 
