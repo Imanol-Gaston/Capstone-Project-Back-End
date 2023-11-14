@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from models import db, Profile
 from config import config
@@ -16,20 +17,19 @@ def create_app(enviroment):
 
 enviroment = config['development']
 app = create_app(enviroment)
+CORS(app)
 
-@app.route('/api/v1/profiles/', methods=['GET'])
+@app.route('/api/v1/profiles', methods=['GET'])
 def get_profiles():
     profiles = [ profile.json() for profile in Profile.query.all() ] 
-    response = jsonify({'profiles': profiles })
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    return jsonify({'profiles': profiles })
 
 # @app.route('/api/v1/profiles/<id>', methods=['GET'])
 # def get_profile(id):
 #     response = {'message': 'success'}
 #     return jsonify(response)
 
-@app.route('/api/v1/profiles/id/', methods=['GET'])
+@app.route('/api/v1/profiles/<id>', methods=['GET'])
 def get_profile(id):
     profile = Profile.query.filter_by(id=id).first()
     if profile is None:
@@ -37,7 +37,7 @@ def get_profile(id):
 
     return jsonify({'profile': profile.json() })
 
-@app.route('/api/v1/profiles/', methods=['POST'])
+@app.route('/api/v1/profiles', methods=['POST'])
 def create_profile():
     print(request)
     print(request.json)
