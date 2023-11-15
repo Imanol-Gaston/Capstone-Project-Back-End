@@ -1,2 +1,6 @@
 Flask
+flask_cors
+flask_sqlalchemy
+datetime
+virtualenv
 gunicorn
