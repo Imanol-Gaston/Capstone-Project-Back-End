@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from os import environ
 
 from models import db, Profile
 from config import config
@@ -15,7 +16,7 @@ def create_app(enviroment):
         
     return app
 
-enviroment = config['development']
+enviroment = config[environ.get('FLASK_ENV')]
 app = create_app(enviroment)
 CORS(app)
 
