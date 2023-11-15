@@ -16,8 +16,8 @@ def create_app(enviroment):
         
     return app
 
-enviroment = config[environ.get('FLASK_ENV')]
-app = create_app(enviroment)
+env_config = config['production']
+app = create_app(env_config)
 CORS(app)
 
 @app.route('/api/v1/profiles', methods=['GET'])
