@@ -24,17 +24,12 @@ def get_profiles():
     profiles = [ profile.json() for profile in Profile.query.all() ] 
     return jsonify({'profiles': profiles })
 
-# @app.route('/api/v1/profiles/<id>', methods=['GET'])
-# def get_profile(id):
-#     response = {'message': 'success'}
-#     return jsonify(response)
-
 @app.route('/api/v1/profiles/<id>', methods=['GET'])
 def get_profile(id):
     profile = Profile.query.filter_by(id=id).first()
     if profile is None:
         return jsonify({'message': 'User does not exists'}), 404
-
+    
     return jsonify({'profile': profile.json() })
 
 @app.route('/api/v1/profiles', methods=['POST'])
