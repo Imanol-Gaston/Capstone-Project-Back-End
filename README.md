@@ -1,4 +1,4 @@
-# Freelance Industrial Inspectors Application Documentation
+# Freelance Industrial Inspectors Application Documentation Back End
 
 ## Description
 This Flask application provides a service for finding freelance industrial inspectors. It exposes three endpoints to interact with inspector profiles.
@@ -46,18 +46,18 @@ Status Code: 200 OK
   // Other profiles...
 ]
 
-### 2. Get Individual Inspector Profile
-#### Description
+2. Get Individual Inspector Profile
+Description
 This endpoint returns details of a specific inspector's profile.
 
-#### https://capstone-project-back-end-production.up.railway.app/api/v1/profiles/id
+https://capstone-project-back-end-production.up.railway.app/api/v1/profiles/id
 
-#### GET /profiles/{id}
+GET /profiles/{id}
 
-#### Request Parameters
-#### {id}: Unique identifier of the inspector.
-####Successful Response
-#### Status Code: 200 OK
+Request Parameters
+{id}: Unique identifier of the inspector.
+Successful Response
+Status Code: 200 OK
 
 {
   "id": 1,
@@ -82,15 +82,15 @@ This endpoint returns details of a specific inspector's profile.
   ]
 }
 
-### 3. Add Inspector Profile
-#### Description
+3. Add Inspector Profile
+Description
 This endpoint allows adding a new inspector profile.
 
-#### https://capstone-project-back-end-production.up.railway.app/api/v1/profiles
+https://capstone-project-back-end-production.up.railway.app/api/v1/profiles
 
-#### POST /profiles
+POST /profiles
 
-#### Request Body
+Request Body
 
 {
   "user_id": 1001,
