@@ -12,7 +12,7 @@ This endpoint returns all profiles of industrial inspectors stored in the databa
 
 #### https://capstone-project-back-end-production.up.railway.app/api/v1/profiles
 
-## GET PROFILES
+#### GET PROFILES
 
 #### Request Parameters
 None.
